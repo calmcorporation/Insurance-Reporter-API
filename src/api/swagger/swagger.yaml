@@ -1,0 +1,37 @@
+swagger: '2.0'
+info:
+  x-audience: company-internal
+  title: Parcel Helper Service API
+  description: API for
+  version: 1.0.0
+  x-api-id: d0184f38-b98d-11e7-9c56-68f728c1ba70
+  contact: 
+    name: Duc Huy Bui
+    url: http://duchuybui.de
+    email: bdh.coding@googlemail.com
+paths:
+  '/identifier-types/{identifier_type}/source-ids':
+    get:
+      parameters:
+        - $ref: '#/parameters/identifier_type'
+      responses:
+        '200':
+          description: The identifiers associated with the source id.
+      security:
+        - oauth2:
+            - fulfillment-order-service.read
+parameters:
+  identifier_type:
+    name: identifier_type
+    description: Specifies the type of the customer identifier.
+    in: path
+    type: string
+    required: true
+securityDefinitions:
+  oauth2:
+    type: oauth2
+    flow: application
+    tokenUrl: 'https://identity.zalando.com/oauth2/token'
+    scopes:
+      fulfillment-order-service.read: Access right needed to read from the fulfillment order service.
+      fulfillment-order-service.write: Access right needed to write to the fulfillment order service.
